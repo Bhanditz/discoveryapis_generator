@@ -582,29 +582,11 @@ class NamedMapType extends ComplexDartSchemaType {
     return this;
   }
 
-  JsonType get jsonType =>
+  JsonType _jsonType;
+  JsonType get jsonType => _jsonType ??=
       new MapJsonType(imports, fromType.jsonType, toType.jsonType);
 
   String get classDefinition {
-    var decode = new StringBuffer();
-    decode.writeln('  $className.fromJson(${imports.core.ref()}Map _json) {');
-    decode.writeln(
-        '    _json.forEach((${imports.core.ref()}String key, value) {');
-    decode.writeln('      this[key] = ${toType.jsonDecode('value')};');
-    decode.writeln('    });');
-    decode.writeln('  }');
-
-    var encode = new StringBuffer();
-    encode.writeln('  ${jsonType.declaration} toJson() {');
-    encode.writeln('    final ${jsonType.declaration} _json = '
-        '<${fromType.jsonType.declaration}, '
-        '${toType.jsonType.declaration}>{};');
-    encode
-        .writeln('    this.forEach((${imports.core.ref()}String key, value) {');
-    encode.writeln('      _json[key] = ${toType.jsonEncode('value')};');
-    encode.writeln('    });');
-    encode.writeln('    return _json;');
-    encode.write('  }');
 
     var fromT = fromType.declaration;
     var toT = toType.declaration;
@@ -612,13 +594,14 @@ class NamedMapType extends ComplexDartSchemaType {
     return '''
 ${comment.asDartDoc(0)}class $className
     extends ${imports.collection.ref()}MapBase<$fromT, $toT> {
-  final ${imports.core.ref()}Map _innerMap = {};
+  final ${jsonType.declaration} _innerMap;
 
-  $className();
+  $className() : _innerMap = new ${jsonType.declaration}();
 
-$decode
-$encode
+  $className.fromJson(${imports.core.ref()}Map<${imports.core.ref()}String, dynamic> _json) => new ${jsonType.declaration}.from(_json);
 
+  ${jsonType.declaration} toJson() => new ${jsonType.declaration}.from(_innerMap);
+  
   ${toType.declaration} operator [](${imports.core.ref()}Object key)
       => _innerMap[key];
 

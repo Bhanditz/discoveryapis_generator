@@ -453,23 +453,14 @@ class SourceRequest {
 /// JSON template for a set of custom properties (i.e. all fields in a
 /// particular schema)
 class UserCustomProperties extends collection.MapBase<String, Object> {
-  final Map _innerMap = {};
+  final Map<String, Object> _innerMap;
 
-  UserCustomProperties();
+  UserCustomProperties() : _innerMap = new Map<String, Object>();
 
-  UserCustomProperties.fromJson(Map _json) {
-    _json.forEach((String key, value) {
-      this[key] = value;
-    });
-  }
+  UserCustomProperties.fromJson(Map<String, dynamic> _json) =>
+      new Map<String, Object>.from(_json);
 
-  Map<String, Object> toJson() {
-    final Map<String, Object> _json = <String, Object>{};
-    this.forEach((String key, value) {
-      _json[key] = value;
-    });
-    return _json;
-  }
+  Map<String, Object> toJson() => new Map<String, Object>.from(_innerMap);
 
   Object operator [](Object key) => _innerMap[key];
 
