@@ -2,6 +2,7 @@
 
 library discoveryapis_generator.dartservices.v1;
 
+import 'dart:collection' as collection;
 import 'dart:async';
 import 'dart:convert' as convert;
 
@@ -447,4 +448,40 @@ class SourceRequest {
     }
     return _json;
   }
+}
+
+/// JSON template for a set of custom properties (i.e. all fields in a
+/// particular schema)
+class UserCustomProperties extends collection.MapBase<String, Object> {
+  final Map _innerMap = {};
+
+  UserCustomProperties();
+
+  UserCustomProperties.fromJson(Map _json) {
+    _json.forEach((String key, value) {
+      this[key] = value;
+    });
+  }
+
+  Map<String, Object> toJson() {
+    final Map<String, Object> _json = <String, Object>{};
+    this.forEach((String key, value) {
+      _json[key] = value;
+    });
+    return _json;
+  }
+
+  Object operator [](Object key) => _innerMap[key];
+
+  operator []=(String key, Object value) {
+    _innerMap[key] = value;
+  }
+
+  void clear() {
+    _innerMap.clear();
+  }
+
+  Iterable<String> get keys => _innerMap.keys;
+
+  Object remove(Object key) => _innerMap.remove(key);
 }

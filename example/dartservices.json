@@ -13,7 +13,15 @@
  "servicePath": "api/dartservices/v1/",
  "parameters": {},
  "schemas": {
-  "SourceRequest": {
+   "UserCustomProperties": {
+     "additionalProperties": {
+       "type": "any"
+     },
+     "description": "JSON template for a set of custom properties (i.e. all fields in a particular schema)",
+     "id": "UserCustomProperties",
+     "type": "object"
+   },
+   "SourceRequest": {
    "id": "SourceRequest",
    "type": "object",
    "properties": {
