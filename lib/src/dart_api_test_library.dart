@@ -90,9 +90,9 @@ class DartApiTestLibrary extends TestHelper {
     return """
 library ${apiLibrary.libraryName}.test;
 
-import "dart:core" as core;
 import "dart:async" as async;
 import "dart:convert" as convert;
+import "dart:core" as core;
 
 import 'package:http/http.dart' as http;
 import 'package:test/test.dart' as unittest;

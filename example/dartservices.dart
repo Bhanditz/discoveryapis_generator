@@ -2,8 +2,8 @@
 
 library discoveryapis_generator.dartservices.v1;
 
-import 'dart:collection' as collection;
 import 'dart:async';
+import 'dart:collection' as collection;
 import 'dart:convert' as convert;
 
 import 'package:_discoveryapis_commons/_discoveryapis_commons.dart' as commons;

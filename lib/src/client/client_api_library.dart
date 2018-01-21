@@ -102,22 +102,23 @@ library $libraryName;
 
 """;
 
-    if (imports.core.hasPrefix) {
-      result += "import 'dart:core' as ${imports.core};\n";
-    }
-
-    if (imports.collection.wasCalled) {
-      result += "import 'dart:collection' as ${imports.collection};\n";
-    }
-
     if (imports.async.hasPrefix) {
       result += "import 'dart:async' as ${imports.async};\n";
     } else {
       result += "import 'dart:async';\n";
     }
 
+    if (imports.collection.wasCalled) {
+      result += "import 'dart:collection' as ${imports.collection};\n";
+    }
+
+    result += "import 'dart:convert' as ${imports.convert};\n";
+
+    if (imports.core.hasPrefix) {
+      result += "import 'dart:core' as ${imports.core};\n";
+    }
+
     result += """
-import 'dart:convert' as ${imports.convert};
 
 import 'package:_discoveryapis_commons/_discoveryapis_commons.dart' as ${imports.commons};
 """;
